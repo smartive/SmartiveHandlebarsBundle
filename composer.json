@@ -13,18 +13,8 @@
     "source": "https://github.com/smartive/SmartiveHandlebarsBundle"
   },
   "autoload": {
-    "psr-4": { "Migros\\ComponentsBundle\\": "" }
+    "psr-4": { "Smartive\\HandlebarsBundle\\": "" }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:migros/MigrosModels.git"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:migros/MigrosSdkBundle.git"
-    }
-  ],
   "require": {
     "php": ">=5.5.0",
     "symfony/framework-bundle": "~2.6",
@@ -33,7 +23,11 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.0",
-    "phpunit/phpunit": "~4.0"
+    "phpunit/phpunit": "~4.0",
+    "symfony/twig-bundle": "~2.6"
+  },
+  "suggest": {
+    "symfony/twig-bundle": "If you want to use the Handlebars Twig extension to render Handlebars templates inside your Twig templates."
   },
   "config": {
     "bin-dir": "bin",
