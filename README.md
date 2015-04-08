@@ -28,10 +28,9 @@ public function registerBundles()
 }
 ```
 
-Some of the features can be configured in the ``migros_components`` section of app/config/config.yml.
-Documentation for those features can be found in `Resources/doc/features`.
-
 ## Configuration
+
+Some of the features can be configured in the ``smartive_handlebars`` section of `app/config/config.yml`.
 
 ### Template directories
 
