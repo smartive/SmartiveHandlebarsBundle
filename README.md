@@ -33,13 +33,6 @@ Documentation for those features can be found in `Resources/doc/features`.
 
 ## Configuration
 
-The Handlebars feature is enabled by default. It can be disabled using the following configuration:
-
-```
-smartive_handlebars:
-    enabled: false
-```
-
 ### Template directories
 
 The `template_directories` setting let's you define where to look for Handlebars templates.
@@ -63,10 +56,18 @@ smartive_handlebars:
         template_directories_recursive: false
 ```
 
+The Handlebars Twig extension is enabled by default. To disable it add this to your configuration:
+
+```
+smartive_handlebars:
+    twig:
+        enabled: false
+```
+
 ## Usage
 
 ### Rendering service
-The `migros_components.handlebars.templating` service offers a `render` method which can be use to render Handlebars templates.
+The `smartive_handlebars.templating.renderer` service offers a `render($templateName, $data)` method which can be use to render Handlebars templates.
 
 ### Twig
-
+To render Handlebars templates in Twig you can use the Twig function `handlebars(templateName, data)`.
