@@ -14,8 +14,6 @@ use Symfony\Component\HttpKernel\Config\FileLocator;
  */
 class Renderer
 {
-    const HANDLEBARS_EXTENSION = '.hbs';
-
     /**
      * @var FileLocator
      */
@@ -30,11 +28,13 @@ class Renderer
      * Constructor
      *
      * @param FileLocator $fileLocator                  File locator instance
+     * @param string      $fileExtension                File extension for Handlebar files
      * @param array       $templateDirectories          List of directories containing handlebars templates
      * @param boolean     $templateDirectoriesRecursive Whether to include sub directories of template directories
      */
     public function __construct(
         FileLocator $fileLocator,
+        $fileExtension,
         array $templateDirectories,
         $templateDirectoriesRecursive = true
     ) {
@@ -48,7 +48,7 @@ class Renderer
         $loader = new FilesystemLoader(
             $templateDirectories,
             array(
-                'extension' => self::HANDLEBARS_EXTENSION
+                'extension' => $fileExtension
             )
         );
         $this->handlebarsRenderingEngine = new Handlebars(

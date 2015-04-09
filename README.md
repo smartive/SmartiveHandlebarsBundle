@@ -32,9 +32,20 @@ public function registerBundles()
 
 Some of the features can be configured in the ``smartive_handlebars`` section of `app/config/config.yml`.
 
+### Handlebars file extension
+
+The default file extension for Handlebars files is set to `.hbs`. 
+This can be overridden using the following setting (example file extension set to `.handlebars`):
+
+```
+smartive_handlebars:
+    templating:
+        file_extension: .handlebars
+```
+
 ### Template directories
 
-The `template_directories` setting let's you define where to look for Handlebars templates.
+The `template_directories` setting lets you define where to look for Handlebars templates.
 You can use Symfony resource notation as well as absolute file paths to configure directories.
 
 
@@ -46,7 +57,7 @@ smartive_handlebars:
             - /var/www/templates
 ```
 
-Per default, templates are getting search for in template directories recursively.
+By default, templates are getting search for in template directories recursively.
 You can disable this behaviour as follows:
 
 ```
@@ -54,6 +65,8 @@ smartive_handlebars:
     templating:
         template_directories_recursive: false
 ```
+
+### Twig extension
 
 The Handlebars Twig extension is enabled by default. To disable it add this to your configuration:
 
