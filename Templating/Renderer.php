@@ -31,6 +31,8 @@ class Renderer
      * @param string      $fileExtension                File extension for Handlebar files
      * @param array       $templateDirectories          List of directories containing handlebars templates
      * @param boolean     $templateDirectoriesRecursive Whether to include sub directories of template directories
+     *
+     * @throws \InvalidArgumentException If no template directories got defined.
      */
     public function __construct(
         FileLocator $fileLocator,
@@ -38,6 +40,9 @@ class Renderer
         array $templateDirectories,
         $templateDirectoriesRecursive = true
     ) {
+        if (empty($templateDirectories)) {
+            throw new \InvalidArgumentException('No Handlebars template directories got defined in "smartive_handlebars.templating.template_directories".');
+        }
         $this->fileLocator = $fileLocator;
         if ($templateDirectoriesRecursive) {
             $templateDirectories = $this->getTemplateDirectoriesRecursive($templateDirectories);
