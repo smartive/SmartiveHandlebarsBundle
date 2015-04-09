@@ -5,13 +5,13 @@ Bundle to integrate Handlebars templates into your Symfony2 application
 
 Require the `smartive/handlebars-bundle` package in your composer.json and update your dependencies.
 
-```json
+```
 {
-    // ...
+    …
     "require": {
         "smartive/handlebars-bundle": "dev-master"
     }
-    // ..
+    …
 }
 ```
 
