@@ -3,13 +3,13 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="smartive_handlebars.helper.is" class="Smartive\HandelbarsBundle\Helper\IsHelper">
+        <service id="smartive_handlebars.helper.is" class="Smartive\HandlebarsBundle\Helper\IsHelper">
             <tag name="smartive_handlebars.helper" alias="is" />
         </service>
-        <service id="smartive_handlebars.helper.compare" class="Smartive\HandelbarsBundle\Helper\CompareHelper">
+        <service id="smartive_handlebars.helper.compare" class="Smartive\HandlebarsBundle\Helper\CompareHelper">
             <tag name="smartive_handlebars.helper" alias="compare" />
         </service>
-        <service id="smartive_handlebars.helper.with_hash" class="Smartive\HandelbarsBundle\Helper\WithHashHelper">
+        <service id="smartive_handlebars.helper.with_hash" class="Smartive\HandlebarsBundle\Helper\WithHashHelper">
             <tag name="smartive_handlebars.helper" alias="withHash" />
         </service>
     </services>
