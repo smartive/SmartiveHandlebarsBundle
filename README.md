@@ -1,5 +1,8 @@
 # SmartiveHandlebarsBundle
-Bundle to integrate Handlebars templates into your Symfony2 application
+
+Bundle to integrate Handlebars templates into your Symfony2 application.
+
+This bundle renders handlebars with the help of [xamin/handlebars.php](https://github.com/XaminProject/handlebars.php).
 
 ## Installation
 
