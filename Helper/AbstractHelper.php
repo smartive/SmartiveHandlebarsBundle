@@ -25,7 +25,9 @@ abstract class AbstractHelper implements Helper
             return $this->cleanStringValue($name);
         }
 
-        return empty($context->get($name)) ? $name : $context->get($name);
+        $contextValue = $context->get($name);
+
+        return is_null($contextValue) || $contextValue === '' ? $name : $contextValue;
     }
 
     /**
