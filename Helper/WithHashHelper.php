@@ -24,7 +24,7 @@ class WithHashHelper extends AbstractHelper
     public function execute(Template $template, Context $context, $args, $source)
     {
         $buffer = '';
-        if (preg_match_all('/\w+\=(?:"|\')?[^"\'\r\n]+(?:"|\')?(?:\s|$)/', $args, $matches)) {
+        if (preg_match_all('/\w+\=(?:"|\')?[^"\'\r\n\=]+(?:"|\')?(?:\s|$)/', $args, $matches)) {
             $data = array();
             foreach ($matches[0] as $match) {
                 $keyValuePair = explode('=', $match);
