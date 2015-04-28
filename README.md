@@ -87,9 +87,7 @@ The `smartive_handlebars.templating.renderer` service offers a `render($template
 ### Twig
 To render Handlebars templates in Twig you can use the Twig function `handlebars(templateName, data)`.
 
-## Extension
-
-### Custom Handlebars helpers
+## Custom Handlebars helpers
 You can add you own Handlebars helpers as tagged services by extending from `Handlebars\Helper`. To find out more about how to write custom helpers please have a look at the [built-in helpers by xamin/handlebars.php](https://github.com/XaminProject/handlebars.php/tree/master/src/Handlebars/Helper).
 
 Once you implemented your own helper you have to register it as a service using the `smartive_handlebars.helper` tag and an appropriate alias:
