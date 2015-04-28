@@ -25,8 +25,6 @@ class SmartiveHandlebarsExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('helpers.xml');
-
         foreach ($config as $serviceName => $serviceConfig) {
             if ($this->isConfigEnabled($container, $serviceConfig)) {
                 $this->loadService($serviceName, $serviceConfig, $container, $loader);
