@@ -58,7 +58,7 @@ You can use Symfony resource notation as well as absolute file paths to configur
 smartive_handlebars:
     templating:
         template_directories:
-            - @AcmeDemo/Resources/views/Templates/
+            - @AcmeDemo/Resources/views/Templates
             - /var/www/templates
 ```
 
