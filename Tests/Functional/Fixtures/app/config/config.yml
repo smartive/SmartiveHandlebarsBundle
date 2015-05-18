@@ -1,0 +1,11 @@
+framework:
+    secret: smartive
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    templating:
+      engines: ['twig']
+
+smartive_handlebars:
+    templating:
+        template_directories:
+            - %kernel.root_dir%/Resources/hbs_views

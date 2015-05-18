@@ -22,7 +22,6 @@
     "xamin/handlebars.php": "~0.10"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "~2.0",
     "phpunit/phpunit": "~4.0",
     "symfony/twig-bundle": "~2.6"
   },

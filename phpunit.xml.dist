@@ -5,7 +5,11 @@
     backupGlobals                 = "false"
     colors                        = "true"
     verbose                       = "true"
+    syntaxCheck                   = "true"
     bootstrap                     = "vendor/autoload.php"
+    convertErrorsToExceptions     = "true"
+    convertNoticesToExceptions    = "true"
+    convertWarningsToExceptions   = "true"
 >
     <testsuites>
         <testsuite name="Smartive Handlebars Bundle Test Suite">
@@ -17,8 +21,14 @@
         <whitelist>
             <directory>.</directory>
             <exclude>
-                <directory>Resources</directory>
+                <directory>./Resources</directory>
+                <directory>./Tests</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>
+
+    <php>
+        <server name="KERNEL_DIR" value="./Tests/Functional/Fixtures/app" />
+    </php>
 </phpunit>
