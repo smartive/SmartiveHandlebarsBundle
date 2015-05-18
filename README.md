@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/smartive/SmartiveHandlebarsBundle.svg?branch=master)](https://travis-ci.org/smartive/SmartiveHandlebarsBundle)
+
 # SmartiveHandlebarsBundle
 
 Bundle to integrate Handlebars templates into your Symfony2 application.
