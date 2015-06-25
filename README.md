@@ -20,7 +20,7 @@ Require the `smartive/handlebars-bundle` package in your composer.json and updat
 }
 ```
 
-Register the bundle and in `app/AppKernel.php`:
+Register the bundle in `app/AppKernel.php`:
 
 ```php
 // app/AppKernel.php
