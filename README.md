@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/smartive/SmartiveHandlebarsBundle.svg?branch=master)](https://travis-ci.org/smartive/SmartiveHandlebarsBundle)
+[![Coverage Status](https://coveralls.io/repos/smartive/SmartiveHandlebarsBundle/badge.svg?branch=master&service=github)](https://coveralls.io/github/smartive/SmartiveHandlebarsBundle?branch=master)
 
 # SmartiveHandlebarsBundle
 
