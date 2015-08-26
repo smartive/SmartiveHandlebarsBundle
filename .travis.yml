@@ -3,10 +3,14 @@ language: php
 php:
   - 5.5
   - 5.4
-  - 5.3
 
 before_install:
   - composer self-update
   - composer update --prefer-dist
 
-script: phpunit
+script:
+  - mkdir -p build/logs
+  - bin/phpunit
+
+after_script:
+  - bin/coveralls -v

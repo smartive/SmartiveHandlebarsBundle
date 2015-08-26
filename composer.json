@@ -16,7 +16,7 @@
     "psr-4": { "Smartive\\HandlebarsBundle\\": "" }
   },
   "require": {
-    "php": ">=5.3.9",
+    "php": ">=5.4.0",
     "symfony/framework-bundle": "~2.6",
     "symfony/finder": "~2.6",
     "xamin/handlebars.php": "~0.10"
