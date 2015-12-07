@@ -16,15 +16,15 @@
     "psr-4": { "Smartive\\HandlebarsBundle\\": "" }
   },
   "require": {
-    "php": ">=5.4.0",
-    "symfony/framework-bundle": "~2.6",
-    "symfony/finder": "~2.6",
+    "php": ">=5.5.0",
+    "symfony/framework-bundle": "~3.0",
+    "symfony/finder": "~3.0",
     "xamin/handlebars.php": "~0.10"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
     "satooshi/php-coveralls": "dev-master",
-    "symfony/twig-bundle": "~2.6"
+    "symfony/twig-bundle": "~3.0"
   },
   "suggest": {
     "symfony/twig-bundle": "If you want to use the Handlebars Twig extension to render Handlebars templates inside your Twig templates."
