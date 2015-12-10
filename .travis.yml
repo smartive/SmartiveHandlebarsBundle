@@ -1,15 +1,44 @@
 language: php
 
+sudo: false
+
 php:
-  - 5.5
   - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+
+env: SYMFONY_VERSION=2.7.*
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 5.5
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.5
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.5
+      env: SYMFONY_VERSION=3.0.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.5.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.6.*
+    - php: 5.6
+      env: SYMFONY_VERSION=2.8.*
+    - php: 5.6
+      env: SYMFONY_VERSION=3.0.*
 
 before_install:
   - composer self-update
-  - composer update --prefer-dist
+  - mkdir -p build/logs
+  - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+
+install: composer update --prefer-source
 
 script:
-  - mkdir -p build/logs
   - bin/phpunit
 
 after_script:
