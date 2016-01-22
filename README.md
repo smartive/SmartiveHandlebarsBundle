@@ -111,3 +111,34 @@ You now can use your custom Handlebars helper inside your templates as follows:
     {{!-- do stuff --}}
 {{/myDemo}}
 ```
+
+## Caching
+
+The rendering service offers the ability to cache the parsed template between requests for faster rendering.
+
+You can enable caching by setting `smartive_handlebars.cache` to a existing cache service ID in your `app/config/config.yml`:
+
+```
+smartive_handlebars:
+    cache: <service-id>
+```
+
+There are two caching services / strategies available per default:
+- `smartive_handlebars.cache.disk`: Uses [Handlebars\Cache\Disk](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/Disk.php) to read/write file cache in Symfony's cache directory
+- `smartive_handlebars.cache.apc`: Uses [Handlebars\Cache\APC](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/APC.php) to read/write cache objects using [APC](http://php.net/manual/en/book.apc.php)
+
+You can also define your own caching services by adding a class which implements [Handlebars\Cache](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache.php). 
+To use your custom cache service you have to register it in your service configuration:
+
+```
+# app/config/services.yml
+services:
+    demo_bundle.my_demo_cache_service:
+        class: DemoBundle\Cache\CustomCache
+```
+
+```
+# app/config/config.yml
+smartive_handlebars:
+    cache: demo_bundle.my_demo_cache_service
+```

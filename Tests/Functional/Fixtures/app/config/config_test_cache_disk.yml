@@ -1,0 +1,8 @@
+imports:
+    - { resource: config_test.yml }
+
+smartive_handlebars:
+    cache: 'smartive_handlebars.cache.disk'
+    templating:
+        template_directories:
+            - %kernel.root_dir%/Resources/hbs_views
