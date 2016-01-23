@@ -40,6 +40,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->scalarNode('cache')->info('Service that implements Handlebars\Cache.')->end()
                 ->arrayNode('twig')
                     ->canBeDisabled()
                 ->end()

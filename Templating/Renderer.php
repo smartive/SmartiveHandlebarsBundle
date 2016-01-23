@@ -2,6 +2,7 @@
 
 namespace Smartive\HandlebarsBundle\Templating;
 
+use Handlebars\Cache;
 use Handlebars\Handlebars;
 use Handlebars\Helper;
 use Handlebars\Loader\FilesystemLoader;
@@ -117,7 +118,7 @@ class Renderer
     }
 
     /**
-     * Adds the given helper to the rendering servie
+     * Adds the given helper to the rendering service
      *
      * @param string $helperName Name of the helper
      * @param Helper $helper     Helper
@@ -127,5 +128,17 @@ class Renderer
     public function addHelper($helperName, Helper $helper)
     {
         $this->handlebarsRenderingEngine->addHelper($helperName, $helper);
+    }
+
+    /**
+     * Sets the caching service
+     *
+     * @param Cache $cacheService
+     *
+     * @return void
+     */
+    public function setCache(Cache $cacheService)
+    {
+        $this->handlebarsRenderingEngine->setCache($cacheService);
     }
 }

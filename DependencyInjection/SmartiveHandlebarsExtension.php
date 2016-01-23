@@ -2,10 +2,12 @@
 
 namespace Smartive\HandlebarsBundle\DependencyInjection;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
@@ -23,13 +25,20 @@ class SmartiveHandlebarsExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($config as $serviceName => $serviceConfig) {
-            if ($this->isConfigEnabled($container, $serviceConfig)) {
-                $this->loadService($serviceName, $serviceConfig, $container, $loader);
+        $serviceNames = [
+            'templating',
+            'twig',
+        ];
+
+        foreach ($serviceNames as $serviceName) {
+            if ($this->isConfigEnabled($container, $config[$serviceName])) {
+                $this->loadService($serviceName, $config[$serviceName], $container, $loader);
             }
         }
+
+        $this->loadCache($container, $config, $loader);
     }
 
     /**
@@ -78,5 +87,31 @@ class SmartiveHandlebarsExtension extends Extension
     private function getParameterName($serviceName, $configName)
     {
         return sprintf('%s.%s.%s', $this->getAlias(), $serviceName, $configName);
+    }
+
+    /**
+     * Loads the caching service
+     *
+     * @param array            $config      Configuration values
+     * @param ContainerBuilder $container   Container instance
+     * @param XmlFileLoader    $loader      Loader instance
+     *
+     * @return void
+     */
+    private function loadCache(ContainerBuilder $container, array $config, XmlFileLoader $loader)
+    {
+        if (empty($config['cache'])) {
+            return;
+        }
+
+        try {
+            $templatingService = $container->findDefinition('smartive_handlebars.templating.renderer');
+        } catch (InvalidArgumentException $e) {
+            throw new InvalidConfigurationException('Caching can only be configured if templating is enabled.');
+        }
+
+        $loader->load('cache.xml');
+
+        $templatingService->addMethodCall('setCache', [new Reference($config['cache'])]);
     }
 }

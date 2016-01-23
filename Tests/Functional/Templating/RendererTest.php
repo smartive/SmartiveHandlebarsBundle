@@ -13,11 +13,11 @@ class RendererTest extends KernelTestCase
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
-    public function setUp()
+    public function setUp($environment = 'test')
     {
-        static::bootKernel();
+        static::bootKernel(['environment' => $environment]);
         $this->container = static::$kernel->getContainer();
     }
 
