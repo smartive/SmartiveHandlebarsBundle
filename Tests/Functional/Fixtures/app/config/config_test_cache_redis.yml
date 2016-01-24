@@ -1,0 +1,15 @@
+imports:
+    - { resource: config_test.yml }
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: redis://localhost
+
+smartive_handlebars:
+    cache: 'smartive_handlebars.cache.redis'
+    templating:
+        template_directories:
+            - %kernel.root_dir%/Resources/hbs_views
