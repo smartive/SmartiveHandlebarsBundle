@@ -3,9 +3,10 @@
 namespace Smartive\HandlebarsBundle\Cache;
 
 use Handlebars\Cache;
-use Predis\Client;
+use Predis\Client as Predis;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Redis as PhpRedis;
 
 /**
  * Client to cache Handlebars templates using Redis.
@@ -35,13 +36,13 @@ class Redis implements Cache
     /**
      * Constructor
      *
-     * @param Client|\Redis   $redisClient Redis client instance
+     * @param Predis|PhpRedis $redisClient Redis client instance
      * @param LoggerInterface $logger      Logger instance
      * @param string          $keyPrefix   A prefix to append
      */
     public function __construct($redisClient, LoggerInterface $logger = null, $keyPrefix = self::KEY_PREFIX_DEFAULT)
     {
-        if (!$redisClient instanceof Client && !(class_exists('Redis') && $redisClient instanceof \Redis)) {
+        if (!$redisClient instanceof Predis && !(class_exists('Redis') && $redisClient instanceof PhpRedis)) {
             throw new \InvalidArgumentException('redisClient has to be of type Predis\Client or Redis');
         }
 
