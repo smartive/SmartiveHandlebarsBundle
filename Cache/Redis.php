@@ -88,7 +88,7 @@ class Redis implements Cache
         try {
             $this->redisClient->set($this->keyPrefix.$name, serialize($value));
         } catch (\Exception $e) {
-            $this->logger->alert(sprintf('Failed to set value "%s" for key "%s" using Redis: %s', $value, $name, $e->getMessage()));
+            $this->logger->alert(sprintf('Failed to write key "%s" using Redis: %s', $name, $e->getMessage()));
         }
     }
 
