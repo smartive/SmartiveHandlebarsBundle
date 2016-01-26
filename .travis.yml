@@ -52,5 +52,5 @@ install: composer update --prefer-source
 script:
   - bin/phpunit
 
-after_script:
-  - bin/coveralls -v
+after_success:
+  - travis_retry php vendor/bin/coveralls
