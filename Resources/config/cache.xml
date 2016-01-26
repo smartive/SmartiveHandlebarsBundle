@@ -7,5 +7,10 @@
         <service id="smartive_handlebars.cache.disk" class="Handlebars\Cache\Disk" public="false">
             <argument>%kernel.cache_dir%/smartive_handlebars</argument>
         </service>
+        <service id="smartive_handlebars.cache.redis" class="Smartive\HandlebarsBundle\Cache\Redis" public="false">
+            <argument type="service" id="snc_redis.default" on-invalid="null" />
+            <argument type="service" id="logger" on-invalid="null" />
+            <tag name="monolog.logger" channel="smartive_handlebars" />
+        </service>
     </services>
 </container>
