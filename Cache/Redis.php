@@ -3,7 +3,8 @@
 namespace Smartive\HandlebarsBundle\Cache;
 
 use Handlebars\Cache;
-use Predis\Client as Predis;
+use Predis\Client as PredisClient;
+use Redis as RedisClient;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -18,7 +19,7 @@ class Redis implements Cache
     const KEY_PREFIX_DEFAULT = 'smartive-handlebars:';
 
     /**
-     * @var Client|\Redis
+     * @var PredisClient|RedisClient
      */
     private $redisClient;
 
@@ -35,13 +36,13 @@ class Redis implements Cache
     /**
      * Constructor
      *
-     * @param Predis|\Redis   $redisClient Redis client instance
-     * @param LoggerInterface $logger      Logger instance
-     * @param string          $keyPrefix   A prefix to append
+     * @param PredisClient|RedisClient $redisClient Redis client instance
+     * @param LoggerInterface          $logger      Logger instance
+     * @param string                   $keyPrefix   A prefix to append
      */
     public function __construct($redisClient, LoggerInterface $logger = null, $keyPrefix = self::KEY_PREFIX_DEFAULT)
     {
-        if (!$redisClient instanceof Predis && !(class_exists('Redis') && $redisClient instanceof \Redis)) {
+        if (!$redisClient instanceof PredisClient && !$redisClient instanceof RedisClient) {
             throw new \InvalidArgumentException('redisClient has to be of type \Predis\Client or \Redis');
         }
 
