@@ -9,7 +9,9 @@ snc_redis:
             dsn: redis://localhost
 
 smartive_handlebars:
-    cache: 'smartive_handlebars.cache.redis'
+    cache:
+        enabled: true
+        service: 'smartive_handlebars.cache.redis'
     templating:
         template_directories:
             - %kernel.root_dir%/Resources/hbs_views

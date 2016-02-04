@@ -30,15 +30,18 @@ class SmartiveHandlebarsExtension extends Extension
         $serviceNames = [
             'templating',
             'twig',
+            'cache'
         ];
 
         foreach ($serviceNames as $serviceName) {
             if ($this->isConfigEnabled($container, $config[$serviceName])) {
                 $this->loadService($serviceName, $config[$serviceName], $container, $loader);
+
+                if ('cache' === $serviceName) {
+                    $this->loadCache($container, $config, $loader);
+                }
             }
         }
-
-        $this->loadCache($container, $config, $loader);
     }
 
     /**
@@ -100,7 +103,7 @@ class SmartiveHandlebarsExtension extends Extension
      */
     private function loadCache(ContainerBuilder $container, array $config, XmlFileLoader $loader)
     {
-        if (empty($config['cache'])) {
+        if (empty($config['cache']['service'])) {
             return;
         }
 
@@ -110,8 +113,6 @@ class SmartiveHandlebarsExtension extends Extension
             throw new InvalidConfigurationException('Caching can only be configured if templating is enabled.');
         }
 
-        $loader->load('cache.xml');
-
-        $templatingService->addMethodCall('setCache', [new Reference($config['cache'])]);
+        $templatingService->addMethodCall('setCache', [new Reference($config['cache']['service'])]);
     }
 }
