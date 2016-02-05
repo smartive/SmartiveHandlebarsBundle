@@ -14,11 +14,6 @@ use Psr\Log\NullLogger;
 class Redis implements Cache
 {
     /**
-     * Default key prefix
-     */
-    const KEY_PREFIX_DEFAULT = 'smartive-handlebars:';
-
-    /**
      * @var PredisClient|RedisClient
      */
     private $redisClient;
@@ -40,7 +35,7 @@ class Redis implements Cache
      * @param LoggerInterface          $logger      Logger instance
      * @param string                   $keyPrefix   A prefix to append
      */
-    public function __construct($redisClient, LoggerInterface $logger = null, $keyPrefix = self::KEY_PREFIX_DEFAULT)
+    public function __construct($redisClient, LoggerInterface $logger = null, $keyPrefix = '')
     {
         if (!$redisClient instanceof PredisClient && !$redisClient instanceof RedisClient) {
             throw new \InvalidArgumentException('redisClient has to be of type \Predis\Client or \Redis');

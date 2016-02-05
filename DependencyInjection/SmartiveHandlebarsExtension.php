@@ -30,15 +30,18 @@ class SmartiveHandlebarsExtension extends Extension
         $serviceNames = [
             'templating',
             'twig',
+            'cache'
         ];
 
         foreach ($serviceNames as $serviceName) {
             if ($this->isConfigEnabled($container, $config[$serviceName])) {
                 $this->loadService($serviceName, $config[$serviceName], $container, $loader);
+
+                if ('cache' === $serviceName) {
+                    $this->loadCache($container, $config);
+                }
             }
         }
-
-        $this->loadCache($container, $config, $loader);
     }
 
     /**
@@ -92,16 +95,15 @@ class SmartiveHandlebarsExtension extends Extension
     /**
      * Loads the caching service
      *
-     * @param array            $config      Configuration values
-     * @param ContainerBuilder $container   Container instance
-     * @param XmlFileLoader    $loader      Loader instance
+     * @param ContainerBuilder $container Container instance
+     * @param array            $config    Configuration values
      *
      * @return void
      */
-    private function loadCache(ContainerBuilder $container, array $config, XmlFileLoader $loader)
+    private function loadCache(ContainerBuilder $container, array $config)
     {
-        if (empty($config['cache'])) {
-            return;
+        if (empty($config['cache']['service'])) {
+            throw new InvalidConfigurationException('You need to specify a cache service in order to enable caching.');
         }
 
         try {
@@ -110,8 +112,23 @@ class SmartiveHandlebarsExtension extends Extension
             throw new InvalidConfigurationException('Caching can only be configured if templating is enabled.');
         }
 
-        $loader->load('cache.xml');
+        $this->prepareRedisCache($container, $config['cache']);
 
-        $templatingService->addMethodCall('setCache', [new Reference($config['cache'])]);
+        $templatingService->addMethodCall('setCache', [new Reference($config['cache']['service'])]);
+    }
+
+    /**
+     * Prepares the Redis cache
+     *
+     * @param ContainerBuilder $container   Container instance
+     * @param array            $cacheConfig Cache configuration values
+     *
+     * @return void
+     */
+    private function prepareRedisCache(ContainerBuilder $container, array $cacheConfig)
+    {
+        $redisCacheService = $container->findDefinition('smartive_handlebars.cache.redis');
+        $redisCacheService->replaceArgument(0, new Reference($cacheConfig['redis']['client_service']));
+        $redisCacheService->replaceArgument(2, $cacheConfig['redis']['key_prefix']);
     }
 }

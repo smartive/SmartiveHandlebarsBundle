@@ -2,15 +2,17 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
     <services>
         <service id="smartive_handlebars.cache.apc" class="Handlebars\Cache\APC" public="false" />
         <service id="smartive_handlebars.cache.disk" class="Handlebars\Cache\Disk" public="false">
             <argument>%kernel.cache_dir%/smartive_handlebars</argument>
         </service>
         <service id="smartive_handlebars.cache.redis" class="Smartive\HandlebarsBundle\Cache\Redis" public="false">
-            <argument type="service" id="snc_redis.default" on-invalid="null" />
+            <argument type="service" id="snc_redis.default" />
             <argument type="service" id="logger" on-invalid="null" />
             <tag name="monolog.logger" channel="smartive_handlebars" />
+            <argument>smartive-handlebars:</argument>
         </service>
     </services>
 </container>
