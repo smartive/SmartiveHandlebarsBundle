@@ -59,7 +59,7 @@ You can use Symfony resource notation as well as absolute file paths to configur
 smartive_handlebars:
     templating:
         template_directories:
-            - @AcmeDemo/Resources/views/Templates
+            - '@AcmeDemo/Resources/views/Templates'
             - /var/www/templates
 ```
 
@@ -153,7 +153,7 @@ The default configuration can be overridden looks as follows:
 smartive_handlebars:
     cache:
         redis:
-            client_service: 'snc_redis.default'
+            client_service: snc_redis.default
             key_prefix: 'smartive-handlebars:'
 ```
 
@@ -173,4 +173,26 @@ services:
 # app/config/config.yml
 smartive_handlebars:
     cache: demo_bundle.my_demo_cache_service
+```
+
+## Complete configuration example
+
+```
+# app/config/config.yml
+smartive_handlebars:
+    templating:
+        enabled: true
+        file_extension: .hbs
+        template_directories:
+            - '@AcmeDemo/Resources/views/Templates'
+            - /var/www/templates
+        template_directories_recursive: true
+    twig:
+        enabled: true
+    cache:
+        enabled: false
+        service: smartive_handlebars.cache.redis
+        redis:
+            client_service: snc_redis.default
+            key_prefix: 'smartive-handlebars:'
 ```
