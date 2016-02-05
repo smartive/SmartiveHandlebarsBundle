@@ -126,9 +126,38 @@ smartive_handlebars:
 ```
 
 There are several caching services / strategies available per default:
-- `smartive_handlebars.cache.disk`: Uses [Handlebars\Cache\Disk](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/Disk.php) to read/write file cache in Symfony's cache directory
-- `smartive_handlebars.cache.apc`: Uses [Handlebars\Cache\APC](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/APC.php) to read/write cache objects using [APC](http://php.net/manual/en/book.apc.php)
-- `smartive_handlebars.cache.redis`: Uses the [RedisBundle](https://github.com/snc/SncRedisBundle) to read/write cache objects using a [Redis Server](http://redis.io/). The Redis client (has to be of type `\Predis\Client` or `\Redis`) being used can be specified using the `smartive_handlebars.cache.redis.client` parameter which defaults to `snc_redis.default`.
+
+### Disk
+
+Service ID: `smartive_handlebars.cache.disk`
+
+Uses [Handlebars\Cache\Disk](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/Disk.php) to read/write file cache in Symfony's cache directory
+
+### APC
+
+Service ID: `smartive_handlebars.cache.apc`
+
+Uses [Handlebars\Cache\APC](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache/APC.php) to read/write cache objects using [APC](http://php.net/manual/en/book.apc.php)
+
+### Redis
+
+Service ID: `smartive_handlebars.cache.redis`
+
+Uses [PhpRedis](https://github.com/phpredis/phpredis) or [Predis](https://github.com/nrk/predis) to read/write cache objects using a [Redis Server](http://redis.io/). 
+This bundle integrates with [RedisBundle](https://github.com/snc/SncRedisBundle) in order to make configuring your Redis implementation even easier. 
+The default Redis client being used is `snc_redis.default` (see [RedisBundle documentation](https://github.com/snc/SncRedisBundle/blob/master/Resources/doc/index.md#usage)).
+
+The default configuration can be overridden looks as follows:
+
+```
+smartive_handlebars:
+    cache:
+        redis:
+            client_service: 'snc_redis.default'
+            key_prefix: 'smartive-handlebars:'
+```
+
+### Custom
 
 You can also define your own caching services by adding a class which implements [Handlebars\Cache](https://github.com/XaminProject/handlebars.php/blob/master/src/Handlebars/Cache.php). 
 To use your custom cache service you have to register it in your service configuration:
