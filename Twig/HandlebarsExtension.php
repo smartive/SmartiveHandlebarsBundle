@@ -38,7 +38,7 @@ class HandlebarsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'handlebars' => new \Twig_Function_Method($this, 'renderHandlebars', array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('handlebars', array($this, 'renderHandlebars'), array('is_safe' => array('html')))
         );
     }
 

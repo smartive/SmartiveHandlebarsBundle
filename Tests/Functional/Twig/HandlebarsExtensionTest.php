@@ -28,7 +28,7 @@ class HandlebarsExtensionTest extends KernelTestCase
 
     /**
      * @expectedException \Twig_Error_Runtime
-     * @expectedExceptionMessage during the rendering of a template ("Template notexisting not found.") in "::missing_hbs.html.twig" at line 1.
+     * @expectedExceptionMessage Template notexisting not found.
      */
     public function testTemplateNotFound()
     {
