@@ -20,14 +20,15 @@
     "php": ">=5.4.0",
     "symfony/framework-bundle": "^2.5|^3.0",
     "symfony/finder": "^2.5|^3.0",
-    "xamin/handlebars.php": "^0.10.3"
+    "xamin/handlebars.php": "0.10.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^4.0",
     "predis/predis": "^1.0",
     "satooshi/php-coveralls": "^1.0",
-    "snc/redis-bundle": "^1.1",
-    "symfony/twig-bundle": "^2.5|^3.0"
+    "snc/redis-bundle": "^1.1|^2.0",
+    "symfony/twig-bundle": "^2.5|^3.0",
+    "twig/twig": "^1.30"
   },
   "suggest": {
     "snc/redis-bundle": "If you want to cache templates using Redis.",
